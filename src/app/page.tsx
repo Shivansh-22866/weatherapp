@@ -1,8 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import "./page.module.css";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { ReloadIcon } from "@radix-ui/react-icons"; 
+import Link from "next/link";
 function getCurrentDate() {
   const currentDate = new Date();
   const options = {month:"long"};
@@ -84,13 +87,29 @@ export default function Home() {
                   <span>{date}</span>
                 </div>
                 <div>
-                  <Button variant={"secondary"} className="gap-2 items-center"><span>More</span><i className="fas fa-arrow-right"></i></Button>
+                  <Button variant={"secondary"} className="gap-2 items-center">
+                    <Link href={{ pathname: '/weather-details', query: { city: city } }}>
+                      <span>More </span><i className="fas fa-arrow-right"></i>
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </div>
           </>
         ) : (
-          <div className="p-8 flex flex-col gap-2 bg-gradient-to-br from-violet-500 to-violet-900 text-white w-full rounded-2xl transition-shadow hover:shadow-4xl">Loading...</div>
+          <div className="p-8 flex flex-col gap-2 bg-gradient-to-br from-violet-500 to-violet-900 text-white w-full rounded-2xl transition-shadow hover:shadow-4xl">
+                <form className="flex flex-row gap-4" onSubmit={(e) => {
+                e.preventDefault();
+                fetchData(city);
+              }}>
+                <Input placeholder="Enter the location" onChange={(e) => setCity(e.target.value)}/>
+                <Button>Search</Button>
+              </form>
+            <div className="flex flex-col items-center gap-4">
+              <span className="text-2xl font-bold">Loading</span>
+              <ReloadIcon className="h-8 w-8 animate-spin" />
+            </div>
+          </div>
         )}
       </article>
     </main>
