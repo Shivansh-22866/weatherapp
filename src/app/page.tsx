@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import "./page.module.css";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 function getCurrentDate() {
   const currentDate = new Date();
   const options = {month:"long"};
@@ -12,7 +13,7 @@ function getCurrentDate() {
 
 export default function Home() {
   const date = getCurrentDate();
-  const [weatherData, setWeatherData] = useState(null);
+  const [weatherData, setWeatherData] = useState<any>(null);
   const [city, setCity] = useState("London");
 
   async function fetchData(cityName: string) {
@@ -25,8 +26,29 @@ export default function Home() {
     }
   }
 
+  async function fetchDataCoords(lat: number, lon: number) {
+    try {
+      const res = await fetch(`http://localhost:3000/api/weather?lat=${lat}&lon=${lon}`);
+      const jsonData = (await res.json()).data;
+      setWeatherData(jsonData);
+    } catch(err) {
+      console.error(err);
+    }
+  }
+
   useEffect(() => {
-    fetchData("London");
+    //fetchData("London");
+    if("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          fetchDataCoords(latitude, longitude);
+        }, (err) => {
+          console.error(err);
+          fetchData("Delhi");
+        }
+      );
+    }
   }, []);
 
   return (
@@ -34,28 +56,41 @@ export default function Home() {
       <article>
         {weatherData && weatherData.weather && weatherData.weather[0] ? (
           <>
-            <div className="p-8 flex flex-col gap-2 bg-violet-700 text-white w-[25rem] rounded-2xl transition-shadow hover:shadow-2xl shadow-xl shadow-sm">
-              <Input value={'Delhi'} />
-              <div className="my-8 flex flex-row items-center justify-between">
+            <div className="p-8 flex flex-col gap-2 bg-gradient-to-br from-violet-500 to-violet-900 text-white w-full rounded-2xl transition-shadow hover:shadow-4xl">
+              <form className="flex flex-row gap-4" onSubmit={(e) => {
+                e.preventDefault();
+                fetchData(city);
+              }}>
+                <Input placeholder="Enter the location" onChange={(e) => setCity(e.target.value)}/>
+                <Button>Search</Button>
+              </form>
+              <div className="my-8 flex flex-row gap-8 items-center justify-between">
               {weatherData?.weather[0]?.description === "rain" ||
                 weatherData?.weather[0]?.description === "fog" ? (
                   <i
                     className={`wi wi-day-${weatherData?.weather[0]?.description} text-8xl`}
                   ></i>
                 ) : (
-                  <i className="wi wi-day-cloudy text-8xl font-bold"></i>
+                  <i className="wi wi-day-cloudy text-5xl sm:text-8xl font-bold"></i>
                 )}
                 <div className="flex flex-col gap-1 text-end">
-                  <span className="text-5xl font-bold">{weatherData?.name} </span>
-                  <span>{(weatherData?.main?.temp - 273.5).toFixed(2) + String.fromCharCode(176)} </span>
+                  <span className="text-4xl sm:text-5xl font-bold">{(weatherData?.main?.temp - 273.5).toFixed(2) + String.fromCharCode(176) + "C"} </span>
+                  <span>{weatherData?.weather[0]?.description?.toUpperCase()} </span>
                 </div>
               </div>
-              <span>{weatherData?.weather[0]?.description?.toUpperCase()} </span>
-              <span>{date}</span>
+              <div className="flex flex-row justify-between items-center gap-4">
+                <div className="flex flex-col text-xl">
+                  <span>{weatherData?.name}</span>
+                  <span>{date}</span>
+                </div>
+                <div>
+                  <Button variant={"secondary"} className="gap-2 items-center"><span>More</span><i className="fas fa-arrow-right"></i></Button>
+                </div>
+              </div>
             </div>
           </>
         ) : (
-          <div className="text-xl">Loading...</div>
+          <div className="p-8 flex flex-col gap-2 bg-gradient-to-br from-violet-500 to-violet-900 text-white w-full rounded-2xl transition-shadow hover:shadow-4xl">Loading...</div>
         )}
       </article>
     </main>
