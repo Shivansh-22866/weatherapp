@@ -3,6 +3,7 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Separator } from '@radix-ui/react-separator';
+import Link from 'next/link';
 
 function WeatherDetails() {
   const searchParams = useSearchParams();
@@ -15,6 +16,7 @@ function WeatherDetails() {
       const jsonData = (await res.json()).data;
       if (res.ok) {
         setWeatherData(jsonData);
+        console.log(jsonData);
       } else {
         throw new Error(jsonData.message || 'Failed to fetch weather data');
       }
@@ -36,6 +38,7 @@ function WeatherDetails() {
 
   return (
     <div>
+      <Link href="/">Go back</Link>
       <h1>Weather Details: {weatherData?.name}</h1>
       {weatherData ? (
         <div className="flex flex-col gap-4 px-8">
