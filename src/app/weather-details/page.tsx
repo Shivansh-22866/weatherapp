@@ -8,11 +8,22 @@ import Link from 'next/link';
 function WeatherDetails() {
   const searchParams = useSearchParams();
   const city = searchParams.get('city');
+  const lat = searchParams.get('lat');
+  const lon = searchParams.get('lon');
+  console.log(city, lat, lon);
   const [weatherData, setWeatherData] = useState(null);
 
-  async function fetchData(cityName) {
+  async function fetchData(location: {city?: string, lat?: string, lon?: string}) {
     try {
-      const res = await fetch(`http://localhost:3000/api/weather?address=${cityName}`);
+      let url;
+      if (location.city) {
+        url = `http://localhost:3000/api/weather?address=${location.city}`;
+      } else if (location.lat && location.lon) {
+        url = `http://localhost:3000/api/weather?lat=${location.lat}&lon=${location.lon}`;
+      } else {
+        throw new Error('Invalid location data');
+      }
+      const res = await fetch(url);
       const jsonData = (await res.json()).data;
       if (res.ok) {
         setWeatherData(jsonData);
@@ -28,13 +39,11 @@ function WeatherDetails() {
 
   useEffect(() => {
     if (city) {
-      fetchData(city).then(data => {
-        if (data) {
-          setWeatherData(data);
-        }
-      });
+      fetchData({ city });
+    } else if (lat && lon) {
+      fetchData({ lat, lon });
     }
-  }, [city]);
+  }, [city, lat, lon]);
 
   return (
     <div>
