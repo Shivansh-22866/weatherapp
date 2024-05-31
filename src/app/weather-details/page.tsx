@@ -2,8 +2,8 @@
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Card } from '@/components/ui/card';
-import { Separator } from '@radix-ui/react-separator';
 import Link from 'next/link';
+import "@fortawesome/fontawesome-free/css/all.css"
 
 function WeatherDetails() {
   const searchParams = useSearchParams();
@@ -48,26 +48,63 @@ function WeatherDetails() {
   return (
     <div className="container mx-auto p-6">
       <Link href="/" className="text-blue-500 hover:underline">Go back</Link>
-      <h1 className="text-3xl font-bold mt-4 mb-2">Weather Details: {weatherData?.name}</h1>
+      <h1 className="text-4xl font-bold mt-8 mb-8">Weather Details: {weatherData?.name}</h1>
       {weatherData ? (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Card title="Weather" className="bg-blue-200 p-4">
-            <p>{weatherData.weather[0].description}</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 md:gap-4 gap-4">
+        <div className="flex flex-col gap-4 md:col-span-2 md:flex md:flex-col md:gap-4">
+          <Card title="Weather" className="bg-blue-200 p-4 flex flex-row items-center justify-center">
+            <p className='font-bold text-2xl'>{(weatherData.weather[0].description)[0].toUpperCase() + (weatherData.weather[0].description).slice(1)}</p>
+            <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
+                    alt={weatherData.weather[0].description}
+                    className="h-24 w-24 sm:h-44 sm:w-44"
+                  />
           </Card>
-          <Card title="Main" className="bg-green-200 p-4">
-            <p>Temperature: {weatherData.main.temp} K</p>
-            <p>Feels Like: {weatherData.main.feels_like} K</p>
-            <p>Min Temperature: {weatherData.main.temp_min} K</p>
-            <p>Max Temperature: {weatherData.main.temp_max} K</p>
-            <p>Pressure: {weatherData.main.pressure} hPa</p>
-            <p>Humidity: {weatherData.main.humidity}%</p>
-          </Card>
-          <Card title="Wind" className="bg-red-200 p-4">
-            <p>Speed: {weatherData.wind.speed} m/s</p>
-            <p>Direction: {weatherData.wind.deg}°</p>
-            <p>Gust: {weatherData.wind.gust} m/s</p>
+          <Card title="Wind" className="bg-red-200 flex flex-col items-start sm:items-center justify-center p-4 gap-4 text-2xl font-bold">
+            <div className='flex flex-row items-center'>
+              <i className='fa fa-wind text-4xl mr-2'></i>
+              <p className="font-bold">Speed:</p>
+              <p>{weatherData.wind.speed} m/s</p>
+            </div>
+            <div className='flex flex-row items-center'>
+              <i className='fas fa-compass text-4xl mr-2'></i>
+              <p className="font-bold">Direction:</p>
+              <p>{weatherData.wind.deg}°</p>
+            </div>
+            <div className='flex flex-row items-center'>
+              <i className='fas fa-wind text-4xl mr-2'></i>
+              <p className="font-bold">Gust:</p>
+              <p>{weatherData.wind.gust} m/s</p>
+            </div>
           </Card>
         </div>
+        <Card title="Main" className="bg-green-200 p-4 text-2xl font-bold flex flex-col gap-6">
+        <div className='flex flex-row items-center justify-start'>
+          <i className='fas fa-thermometer-full text-4xl mr-2'></i>
+          <p className="font-bold">Temperature: {weatherData.main.temp} K</p>
+        </div>
+        <div className='flex flex-row items-center justify-start'>
+          <i className='fas fa-temperature-quarter text-4xl mr-2'></i>
+          <p className="font-bold">Feels Like: {weatherData.main.feels_like} K</p>
+        </div>
+        <div className='flex flex-row items-center justify-start'>
+          <i className='fas fa-temperature-low text-4xl mr-2'></i>
+          <p className="font-bold">Min Temperature: {weatherData.main.temp_min} K</p>
+        </div>
+        <div className='flex flex-row items-center justify-start'>
+          <i className='fas fa-temperature-high text-4xl mr-2'></i>
+          <p className="font-bold">Max Temperature: {weatherData.main.temp_max} K</p>
+        </div>
+        <div className='flex flex-row items-center justify-start'>
+          <i className='fas fa-tachometer-alt text-4xl mr-2'></i>
+          <p className="font-bold">Pressure: {weatherData.main.pressure} hPa</p>
+        </div>
+        <div className='flex flex-row items-center justify-start'>
+          <i className='fas fa-tint text-4xl mr-2'></i>
+          <p className="font-bold">Humidity: {weatherData.main.humidity}%</p>
+        </div>
+        </Card>
+      </div>
+
       ) : (
         <span>Loading weather data...</span>
       )}

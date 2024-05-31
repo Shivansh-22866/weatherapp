@@ -74,3 +74,69 @@
       @apply bg-background text-foreground;
     }
   }
+
+  @keyframes slideIn {
+    0% {
+      transform: translateY(60%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .slide-in {
+    animation: slideIn 0.5s ease-in;
+  }
+
+  .slide-in2 {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in forwards;
+    animation-delay: 0.5s;
+  }
+
+  .slide-in3 {
+    opacity: 0;
+    animation: slideIn 0.5s ease-in forwards;
+    animation-delay: 1s;
+  }
+
+  .slide-in4 {
+    opacity: 0;
+    animation: slideIn 0.5s ease-in forwards;
+    animation-delay: 1.5s;
+  }
+
+  .slide-in5 {
+    opacity: 0;
+    animation: slideIn 0.5s ease-in forwards;
+    animation-delay: 2s;
+  }
+
+  .fade-enter {
+    opacity: 0;
+  }
+  
+  .fade-enter-active {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
+  
+  .fade-exit {
+    opacity: 1;
+  }
+  
+  .fade-exit-active {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
