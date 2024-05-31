@@ -46,16 +46,15 @@ function WeatherDetails() {
   }, [city, lat, lon]);
 
   return (
-    <div>
-      <Link href="/">Go back</Link>
-      <h1>Weather Details: {weatherData?.name}</h1>
+    <div className="container mx-auto p-6">
+      <Link href="/" className="text-blue-500 hover:underline">Go back</Link>
+      <h1 className="text-3xl font-bold mt-4 mb-2">Weather Details: {weatherData?.name}</h1>
       {weatherData ? (
-        <div className="flex flex-col gap-4 px-8">
-          <Card title="Weather">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Card title="Weather" className="bg-blue-200 p-4">
             <p>{weatherData.weather[0].description}</p>
           </Card>
-          <Separator />
-          <Card title="Main">
+          <Card title="Main" className="bg-green-200 p-4">
             <p>Temperature: {weatherData.main.temp} K</p>
             <p>Feels Like: {weatherData.main.feels_like} K</p>
             <p>Min Temperature: {weatherData.main.temp_min} K</p>
@@ -63,8 +62,7 @@ function WeatherDetails() {
             <p>Pressure: {weatherData.main.pressure} hPa</p>
             <p>Humidity: {weatherData.main.humidity}%</p>
           </Card>
-          <Separator />
-          <Card title="Wind">
+          <Card title="Wind" className="bg-red-200 p-4">
             <p>Speed: {weatherData.wind.speed} m/s</p>
             <p>Direction: {weatherData.wind.deg}°</p>
             <p>Gust: {weatherData.wind.gust} m/s</p>
