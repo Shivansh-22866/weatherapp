@@ -31,8 +31,8 @@ import {
 function getCurrentDate() {
   const currentDate = new Date();
   const options = { month: "long" };
-  const monthName = currentDate.toLocaleDateString("en-IN", options);
-  const date = new Date().getDate() + ", " + monthName;
+  const monthName = currentDate.toLocaleDateString("en-IN");
+  const date = monthName;
   return date;
 }
 
