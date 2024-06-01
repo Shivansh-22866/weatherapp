@@ -20,7 +20,6 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
@@ -186,7 +185,7 @@ export default function Home() {
             </div>
           </TabsContent>
           <TabsContent value="coords" className={activeTab === "coords" ? "fade" : ""}>
-            <div className="p-8 flex flex-col gap-2 bg-gradient-to-br from-violet-500 to-violet-900 text-white w-full rounded-2xl transition-shadow hover:shadow-4xl">
+            <div className="p-8 flex flex-col gap-2 bg-[#FBA92C] text-white w-full rounded-2xl transition-shadow hover:shadow-4xl">
               <form
                 className="flex sm:flex-row flex-col gap-4"
                 onSubmit={(e) => {
@@ -247,7 +246,7 @@ export default function Home() {
           </TabsContent>
         </Tabs>
       </article>
-      <Card className="p-4 text-xl bg-violet-300 slide-in3">
+      <Card className="p-4 text-xl bg-[#FBA92C] border-[1.5rem] border-slate-700 slide-in3">
     The Next.js weather widget is a web application designed to 
     provide users with up-to-date weather information for multiple
     locations. Built using Next.js, a popular React framework, 
@@ -274,7 +273,7 @@ export default function Home() {
       <Drawer>
     <DrawerTrigger className="slide-in4">
       <div className="bg-slate-700 text-white py-2 px-4 rounded-md font-semibold">
-        Open
+        Open Weather Carousel
       </div>
     </DrawerTrigger>
     <DrawerContent>
@@ -288,7 +287,7 @@ export default function Home() {
               <CarouselItem key={index}>
                 <div className="p-1">
                   <Card>
-                    <CardContent className="flex flex-col gap-2 bg-gradient-to-br from-violet-500 to-violet-900 text-white rounded-2xl transition-shadow hover:shadow-4xl">
+                    <CardContent className="flex flex-col gap-2 bg-[#FB9A2C] text-white rounded-2xl transition-shadow hover:shadow-4xl">
                       <div className="my-8 flex flex-row gap-8 items-center justify-evenly">
                         <img
                           src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
@@ -323,7 +322,7 @@ export default function Home() {
       </DrawerFooter>
     </DrawerContent>
   </Drawer>
-  <div className="p-4 text-xl bg-violet-300 slide-in5">
+  <div className="p-4 text-xl bg-[#FBA92C] border-[1.5rem] border-slate-700 rounded-xl slide-in5">
   Moreover, the widget offers a convenient feature through a 
   drawer component. Users can open the drawer to reveal a 
   carousel displaying weather information for multiple 

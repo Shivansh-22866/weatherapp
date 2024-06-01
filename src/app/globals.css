@@ -77,7 +77,7 @@
 
   @keyframes slideIn {
     0% {
-      transform: translateY(60%);
+      transform: translateY(40%);
       opacity: 0;
     }
     100% {
@@ -96,30 +96,30 @@
   }
 
   .slide-in {
-    animation: slideIn 0.5s ease-in;
+    animation: slideIn 0.5s ease-in-out;
   }
 
   .slide-in2 {
     opacity: 0;
-    animation: fadeIn 0.5s ease-in forwards;
+    animation: fadeIn 0.5s ease-in-out forwards;
     animation-delay: 0.5s;
   }
 
   .slide-in3 {
     opacity: 0;
-    animation: slideIn 0.5s ease-in forwards;
+    animation: slideIn 0.5s ease-in-out forwards;
     animation-delay: 1s;
   }
 
   .slide-in4 {
     opacity: 0;
-    animation: slideIn 0.5s ease-in forwards;
+    animation: slideIn 0.5s ease-in-out forwards;
     animation-delay: 1.5s;
   }
 
   .slide-in5 {
     opacity: 0;
-    animation: slideIn 0.5s ease-in forwards;
+    animation: slideIn 0.5s ease-in-out forwards;
     animation-delay: 2s;
   }
 

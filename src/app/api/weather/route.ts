@@ -11,9 +11,9 @@ export async function GET(request) {
       "https://api.openweathermap.org/data/2.5/weather?q=" +
       address +
       "&appid=" +
-      "4a0d67d830fb953edfd0dbde2b8cb2ae";
+      `${process.env.WEATHER_KEY}`;
   } else {
-    url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=4a0d67d830fb953edfd0dbde2b8cb2ae`;
+    url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.WEATHER_KEY}`;
   }
   console.log(url);
   const res = await fetch(url);
