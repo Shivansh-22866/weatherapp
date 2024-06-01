@@ -12,7 +12,7 @@ function WeatherDetails() {
   const lat = searchParams.get('lat');
   const lon = searchParams.get('lon');
   console.log(city, lat, lon);
-  const [weatherData, setWeatherData] = useState(null);
+  const [weatherData, setWeatherData] = useState<any>(null);
 
   async function fetchData(location: {city?: string, lat?: string, lon?: string}) {
     try {
