@@ -257,16 +257,16 @@ export default function Home() {
     to switch between viewing weather information based on city 
     names or geographical coordinates. Users can input their 
     desired location in the corresponding input field and click 
-    the "Search" button to retrieve weather data. Additionally, 
+    the &quot;Search&quot; button to retrieve weather data. Additionally, 
     if geolocation is available, the widget automatically fetches 
-    weather data based on the user's current coordinates.
+    weather data based on the user&lsquo;s current coordinates.
     Once weather data is retrieved, it is displayed in a visually appealing format. 
-    Each location's weather information is presented within a 
+    Each location&lsquo;s weather information is presented within a 
     card-like container, featuring an icon representing the 
     current weather condition, temperature in Celsius, and a 
     brief description of the weather. Alongside this, the 
-    location's name and the current date are displayed, providing 
-    context to the weather data. Users can also click on the "More" 
+    location&lsquo;s name and the current date are displayed, providing 
+    context to the weather data. Users can also click on the &quot;More&quot; 
     button to access additional weather details for the selected 
     location.
   </Card>
