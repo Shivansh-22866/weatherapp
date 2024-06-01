@@ -190,7 +190,7 @@ export default function Home() {
                 className="flex sm:flex-row flex-col gap-4"
                 onSubmit={(e) => {
                   e.preventDefault();
-                  fetchDataCoords(latitude, longitude); // Call fetchDataCoords with latitude and longitude
+                  fetchDataCoords(Number(latitude), Number(longitude)); // Call fetchDataCoords with latitude and longitude
                 }}
               >
                 <Input
