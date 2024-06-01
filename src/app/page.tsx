@@ -108,7 +108,7 @@ export default function Home() {
           if (location.coordinates) {
             res = await fetch(`/api/weather?lat=${location.coordinates.lat}&lon=${location.coordinates.lon}`);
           } else {
-            res = await fetch(`/api/weather?address=${location.name}`);
+            res = await fetch(`api/weather?address=${location.name}`);
           }
           const jsonData = (await res.json()).data;
           return jsonData;
@@ -288,7 +288,7 @@ export default function Home() {
       <div className="flex flex-row justify-center">
         <Carousel className="w-full max-w-sm slide-in">
           <CarouselContent>
-            {multipleWeatherData.map((data, index) => (
+            {multipleWeatherData?.map((data, index) => (
               <CarouselItem key={index}>
                 <div className="p-1">
                   <Card>
