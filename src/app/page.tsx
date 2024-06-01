@@ -62,32 +62,37 @@ export default function Home() {
 
   async function fetchDataCity(cityName: string) {
     try {
-      const res = await fetch("http://localhost:3000/api/weather?address=" + cityName);
+      const res = await fetch("/api/weather?address=" + cityName);
       const jsonData = (await res.json()).data;
       setWeatherData(jsonData);
-    } catch(err) {
+      console.log(jsonData); // Log the API response
+    } catch (err) {
       console.error(err);
     }
   }
 
   async function fetchDataCoords(lat: number, lon: number) {
     try {
-      const res = await fetch(`http://localhost:3000/api/weather?lat=${lat}&lon=${lon}`);
+      const res = await fetch(`/api/weather?lat=${lat}&lon=${lon}`);
       const jsonData = (await res.json()).data;
+      console.log(jsonData); // Log the API response
       setWeatherData(jsonData);
-    } catch(err) {
+    } catch (err) {
       console.error(err);
     }
   }
 
   useEffect(() => {
     //fetchData("London");
-    if("geolocation" in navigator) {
+    if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        async (position) => {
           const { latitude, longitude } = position.coords;
-          fetchDataCoords(latitude, longitude);
-        }, (err) => {
+          await fetchDataCoords(latitude, longitude);
+          console.log('fetch');
+          console.log(weatherData);
+        },
+        (err) => {
           console.error(err);
           fetchDataCity("Delhi");
         }
@@ -101,9 +106,9 @@ export default function Home() {
         try {
           let res;
           if (location.coordinates) {
-            res = await fetch(`http://localhost:3000/api/weather?lat=${location.coordinates.lat}&lon=${location.coordinates.lon}`);
+            res = await fetch(`/api/weather?lat=${location.coordinates.lat}&lon=${location.coordinates.lon}`);
           } else {
-            res = await fetch(`http://localhost:3000/api/weather?address=${location.name}`);
+            res = await fetch(`/api/weather?address=${location.name}`);
           }
           const jsonData = (await res.json()).data;
           return jsonData;
