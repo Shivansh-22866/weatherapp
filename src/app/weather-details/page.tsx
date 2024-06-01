@@ -18,9 +18,9 @@ function WeatherDetails() {
     try {
       let url;
       if (location.city) {
-        url = `http://localhost:3000/api/weather?address=${location.city}`;
+        url = `/api/weather?address=${location.city}`;
       } else if (location.lat && location.lon) {
-        url = `http://localhost:3000/api/weather?lat=${location.lat}&lon=${location.lon}`;
+        url = `/api/weather?lat=${location.lat}&lon=${location.lon}`;
       } else {
         throw new Error('Invalid location data');
       }
