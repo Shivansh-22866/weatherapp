@@ -126,7 +126,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-8 p-12">
-      <h1 className="text-8xl font-bold slide-in">NextJS Weather App</h1>
+      <h1 className="sm:text-8xl text-4xl text-pretty text-center font-bold slide-in">NextJS Weather App</h1>
       <article className="slide-in2">
         <Tabs defaultValue="city">
           <TabsList className="grid w-full grid-cols-2">
@@ -147,10 +147,10 @@ export default function Home() {
                   <div className="my-8 flex flex-row gap-8 items-center justify-between">
                   <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
                     alt={weatherData.weather[0].description}
-                    className="h-24 w-24 sm:h-32 sm:w-32"
+                    className="h-20 w-20 sm:h-32 sm:w-32"
                   />
                   <div className="flex flex-col gap-1 text-end">
-                    <span className="text-4xl sm:text-5xl font-bold">{(weatherData.main.temp - 273.15).toFixed(2) + String.fromCharCode(176) + "C"} </span>
+                    <span className="text-2xl sm:text-5xl font-bold">{(weatherData.main.temp - 273.15).toFixed(2) + String.fromCharCode(176) + "C"} </span>
                     <span>{weatherData.weather[0].description.toUpperCase()} </span>
                   </div>
                   </div>
@@ -220,7 +220,7 @@ export default function Home() {
                       className="h-24 w-24 sm:h-32 sm:w-32"
                     />
                     <div className="flex flex-col gap-1 text-end">
-                      <span className="text-4xl sm:text-5xl font-bold">{(weatherData.main.temp - 273.15).toFixed(2) + String.fromCharCode(176) + "C"} </span>
+                      <span className="text-2xl sm:text-5xl font-bold">{(weatherData.main.temp - 273.15).toFixed(2) + String.fromCharCode(176) + "C"} </span>
                       <span>{weatherData.weather[0].description.toUpperCase()} </span>
                     </div>
                   </div>
@@ -251,7 +251,7 @@ export default function Home() {
           </TabsContent>
         </Tabs>
       </article>
-      <Card className="p-4 text-xl bg-[#FBA92C] border-[1.5rem] border-slate-700 slide-in3">
+      <Card className="p-4 text-sm sm:text-xl bg-[#FBA92C] border-[1.5rem] border-slate-700 slide-in3">
     The Next.js weather widget is a web application designed to 
     provide users with up-to-date weather information for multiple
     locations. Built using Next.js, a popular React framework, 
@@ -327,7 +327,7 @@ export default function Home() {
       </DrawerFooter>
     </DrawerContent>
   </Drawer>
-  <div className="p-4 text-xl bg-[#FBA92C] border-[1.5rem] border-slate-700 rounded-xl slide-in5">
+  <div className="p-4 text-sm sm:text-xl bg-[#FBA92C] border-[1.5rem] border-slate-700 rounded-xl slide-in5">
   Moreover, the widget offers a convenient feature through a 
   drawer component. Users can open the drawer to reveal a 
   carousel displaying weather information for multiple 
