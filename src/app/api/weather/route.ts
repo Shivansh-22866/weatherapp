@@ -14,8 +14,8 @@ export async function GET(request: NextRequest) {
   } else {
     url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.WEATHER_KEY}`;
   }
-  console.log(url);
   console.log(process.env.WEATHER_KEY);
+  console.log(url);
   const res = await fetch(url);
 
   const data = await res.json();
